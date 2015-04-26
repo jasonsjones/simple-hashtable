@@ -13,11 +13,25 @@
         this.table = [];
     }
 
-    Hashtable.prototype = {
-        // TODO: implement the following functions:
-        // put(key, value)
-        // remove(key)
-        // get(get)
+    HashTable.prototype = {
+
+        isEmpty: function (attribute) {
+            return this.table.length === 0;
+        },
+
+        put: function (key, value) {
+            var index = loseloseHashCode(key);
+            //console.log(index + ' -- ' + value);
+            this.table[index] = value;
+        },
+
+        get: function (key) {
+            return this.table[loseloseHashCode(key)];
+        },
+
+        remove: function (key) {
+            this.table[loseloseHashCode(key)] = undefined;
+        }
     };
 
     module.exports = HashTable;
