@@ -23,6 +23,7 @@
             var index = loseloseHashCode(key);
             //console.log(index + ' -- ' + value);
             this.table[index] = value;
+            return this;
         },
 
         get: function (key) {
@@ -31,6 +32,7 @@
 
         remove: function (key) {
             this.table[loseloseHashCode(key)] = undefined;
+            return this;
         }
     };
 
