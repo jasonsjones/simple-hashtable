@@ -7,6 +7,13 @@
 (function () {
     'use strict';
 
+    /**
+     * Simple hash function.  Hashes the key to returns a value which
+     * will be used to index into the table array.
+     *
+     * @param {string} key the key to hash
+     * @return {number} the hash value to use as index
+     */
     function loseloseHashCode(key) {
         var hashValue = 0;
         for (var i = 0, len = key.length; i < len; i++) {
