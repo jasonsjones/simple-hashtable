@@ -41,25 +41,56 @@
      */
     HashTable.prototype = {
 
-        isEmpty: function (attribute) {
+        /**
+         * Determines if the hash table is empty
+         *
+         * @returns {boolean} true if hash table is empty, false otherwise
+         */
+        isEmpty: function () {
             return this.table.length === 0;
         },
 
+        /**
+         * Puts the value in the hash table.  Hashes the key to determine
+         * the index in the hash table to assign the value.
+         *
+         * @param {string} key the key to hash to determine the index
+         * @param {number|string|object} value the value to associate with
+         *          the key/hash in the hash table
+         *
+         * @returns {object} this for method chaining
+         */
         put: function (key, value) {
             var index = this.hashFn(key);
             this.table[index] = value;
             return this;
         },
 
+        /**
+         * Gets the value in the hash table based on the hash of the key
+         *
+         * @param {string} key the key to hash to determine the index to
+         *                 retrieve the value
+         * @returns {number|string|object} the value associated the the key
+         */
         get: function (key) {
             return this.table[this.hashFn(key)];
         },
 
+        /**
+         * Removes the value in the hash table associated with the key
+         *
+         * @param {string} key the key to hash to determine the index to
+         *                 remove the value
+         *
+         * @returns {object} this for method chaining
+         */
         remove: function (key) {
             this.table[this.hashFn(key)] = undefined;
             return this;
         }
     };
 
+    // expose HashTable
     module.exports = HashTable;
 }());
