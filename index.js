@@ -23,6 +23,22 @@
     }
 
     /**
+     * Improved hash function.  Hashes the key to returns a value which
+     * will be used to index into the table array.  Better distribution of
+     * hash values than the lose lose hash function.
+     *
+     * @param {string} key the key to hash
+     * @return {number} the hash value to use as index
+     */
+    function djb2HashCode(key) {
+        var hashValue = 5381;
+        for (var i = 0; i < key.length; i++) {
+            hashValue = hashValue * 33 + key.charCodeAt(i);
+        }
+        return hashValue % 1013;
+    }
+
+    /**
      * Creates a new simple hash table instance
      *
      * @constructor
