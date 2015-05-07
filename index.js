@@ -45,7 +45,7 @@
      */
     function HashTable() {
         this.table = [];
-        this.hashFn = loseloseHashCode;
+        this.hashFn = djb2HashCode;
     }
 
     /*
