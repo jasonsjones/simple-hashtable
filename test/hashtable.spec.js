@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var HashTable = require('../');
 
-describe('Hash Table', function () {
+describe('A Hash Table', function () {
     var ht;
 
     beforeEach(function () {
@@ -30,7 +30,7 @@ describe('Hash Table', function () {
         expect(ht.get('mongodb')).to.equal('noSQL database');
     });
 
-    it('correctly chains calls to put for a fluent/cascading API', function () {
+    it('correctly chains calls to the put method for a fluent/cascading API', function () {
         ht.put('node', 'server-side js')
           .put('mongodb', 'noSQL database');
         expect(ht.isEmpty()).to.not.be.true;
@@ -49,7 +49,7 @@ describe('Hash Table', function () {
         expect(ht.get('mongodb')).to.be.undefined;
     });
 
-    it('correctly chains calls to remove for a fluent/cascading API', function () {
+    it('correctly chains calls to the remove method for a fluent/cascading API', function () {
         ht.put('node', 'server-side js')
           .put('mongodb', 'noSQL database');
         expect(ht.isEmpty()).to.not.be.true;
