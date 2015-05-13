@@ -7,6 +7,9 @@
 (function () {
     'use strict';
 
+    var ValuePair = require('./lib/valuePair');
+    var LinkedList = require('singly-linked-list');
+
     /**
      * Simple hash function.  Hashes the key to returns a value which
      * will be used to index into the table array.
@@ -79,6 +82,15 @@
         put: function (key, value) {
             var index = this.hashFn(key);
             this.table[index] = value;
+            return this;
+        },
+
+        scPut: function (key, value) {
+            var index = this.hashFn(key);
+            if (this.table[index] === undefined) {
+                this.table[index] = new LinkedList();
+            }
+            this.table[index].insert(new ValuePair(key, value));
             return this;
         },
 

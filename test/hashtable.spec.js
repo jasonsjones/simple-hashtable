@@ -22,6 +22,12 @@ describe('A Hash Table', function () {
         expect(ht.isEmpty()).to.not.be.true;
     });
 
+    it('hashes a key and puts the value in the hash table using separate chaining', function () {
+        ht.scPut('node', 'asychronous, event-driven io for server side javascript');
+        expect(ht.isEmpty()).to.not.be.true;
+        expect(ht.table[828]).to.be.an.Object;
+    });
+
     it('gets the correct value when given the key', function () {
         ht.put('node', 'server-side js');
         ht.put('mongodb', 'noSQL database');
