@@ -41,6 +41,18 @@
         return hashValue % 1013;
     }
 
+    function listContainsKey(list, key) {
+        var current = list.getHeadNode();
+        while (current !== null) {
+            console.log(current.getData().toString());
+            if (current.getData().key === key) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
     /**
      * Creates a new simple hash table instance
      *
@@ -48,7 +60,7 @@
      */
     function HashTable() {
         this.table = [];
-        this.hashFn = djb2HashCode;
+        this.hashFn = djb2HashCode; // or loseloseHashCode
     }
 
     /*
@@ -85,12 +97,29 @@
             return this;
         },
 
+        /**
+         * Puts the value in the hash table utilizing separate chaining to
+         * handle hash collisions.  Hashes the key to determine
+         * the index of the hash table and inserts a key/value object in the
+         * front of the linked-list at the index.
+         *
+         * @param {string} key the key to hash to determine the index
+         * @param {number|string|object} value the value to associate with
+         *          the key/hash in the hash table
+         *
+         * @returns {object} this for method chaining
+         */
         scPut: function (key, value) {
             var index = this.hashFn(key);
             if (this.table[index] === undefined) {
                 this.table[index] = new LinkedList();
             }
-            this.table[index].insert(new ValuePair(key, value));
+
+            // append new key/value pair (obj) to the front of the linked list.
+            // adding the data to the front of the list will ensure that we
+            // return the latest value from the list in the event there are
+            // duplicate keys with differing values
+            this.table[index].insertFirst(new ValuePair(key, value));
             return this;
         },
 
@@ -103,6 +132,41 @@
          */
         get: function (key) {
             return this.table[this.hashFn(key)];
+        },
+
+        /**
+         * Gets the value in the hash table associated with the key.  This
+         * version utilizes separate chaining to search for the key in the
+         * respective linked-list.
+         *
+         * @param {string} key the key to hash to determine the index to
+         *                 retrieve the value
+         * @returns {number|string|object} the value associated the the key
+         */
+        scGet: function (key) {
+            var index = this.hashFn(key);
+            if (this.table[index] === undefined) {
+                return -1;
+            }
+
+            // initially set the current node to the head of the list
+            var current = this.table[index].getHeadNode();
+
+            // iterate over the list
+            while (current !== null) {
+
+                // until the first keys match
+                if (current.getData().key === key) {
+                    return current.getData().value;
+                }
+
+                // no match, so get the next node in the list
+                current = current.next;
+            }
+
+            // if we get here, there is not a node in the list with the key.
+            // this is very unlikely
+            return -1;
         },
 
         /**
