@@ -12,18 +12,19 @@
 
     /**
      * Simple hash function.  Hashes the key to returns a value which
-     * will be used to index into the table array.
+     * will be used to index into the table array. This hash function is very
+     * susceptible to a hash collision
      *
      * @param {string} key the key to hash
      * @return {number} the hash value to use as index
      */
-    function loseloseHashCode(key) {
-        var hashValue = 0;
-        for (var i = 0, len = key.length; i < len; i++) {
-            hashValue += key.charCodeAt(i);
-        }
-        return hashValue % 42;
-    }
+    // function loseloseHashCode(key) {
+    //     var hashValue = 0;
+    //     for (var i = 0, len = key.length; i < len; i++) {
+    //         hashValue += key.charCodeAt(i);
+    //     }
+    //     return hashValue % 42;
+    // }
 
     /**
      * Improved hash function.  Hashes the key to returns a value which
@@ -44,7 +45,6 @@
     function listContainsKey(list, key) {
         var current = list.getHeadNode();
         while (current !== null) {
-            console.log(current.getData().toString());
             if (current.getData().key === key) {
                 return true;
             }
@@ -164,8 +164,8 @@
                 current = current.next;
             }
 
-            // if we get here, there is not a node in the list with the key.
-            // this is very unlikely
+            // if we get here, there is not a node in the list with the key,
+            // maybe because it was previously removed
             return -1;
         },
 
@@ -180,6 +180,27 @@
         remove: function (key) {
             this.table[this.hashFn(key)] = undefined;
             return this;
+        },
+
+        scRemove: function (key) {
+            var index = this.hashFn(key);
+
+            if (this.table[index] === undefined) {
+                return false;
+            }
+
+            var current = this.table[index].getHeadNode();
+            var listIndex = 0;
+            var status = false;
+            while (listContainsKey(this.table[index], key) && current !== null) {
+                if (current.getData().key === key) {
+                    this.table[index].removeAt(listIndex);
+                    status = true;
+                }
+                current = current.next;
+                listIndex++;
+            }
+            return status;
         }
     };
 
