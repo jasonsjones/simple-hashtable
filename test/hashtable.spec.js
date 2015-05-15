@@ -43,6 +43,14 @@ describe('A Hash Table', function () {
         expect(ht.scGet('mongodb')).to.equal('noSQL database');
     });
 
+    it('returns -1 if asked to get a key that does not exist in the hash table', function () {
+        ht.scPut('node', 'server-side js');
+        ht.scPut('mongodb', 'noSQL database');
+        expect(ht.isEmpty()).to.be.false;
+        expect(ht.scGet('node')).to.equal('server-side js');
+        expect(ht.scGet('express')).to.equal(-1);
+    });
+
     it('gets the last assigned value for a given key when using separate chaining', function () {
         ht.scPut('node', 'bogus value');
         ht.scPut('node', 'server-side js');
@@ -80,4 +88,14 @@ describe('A Hash Table', function () {
         expect(ht.get('node')).to.be.undefined;
         expect(ht.get('mongodb')).to.be.undefined;
     });
+
+    it('removes the key from the hash table when using separate chaining', function () {
+        ht.scPut('node', 'server-side js');
+        expect(ht.isEmpty()).to.be.false;
+        expect(ht.scRemove('node')).to.be.true;
+        expect(ht.scGet('node')).to.equal(-1);
+    });
+
+    it('removes all the keys from the hash table when using separate chaining');
+    it('returns false if asked to remove a key from the hash table that does not exist');
 });
