@@ -189,15 +189,13 @@
         }
 
         var current = this.table[index].getHeadNode();
-        var listIndex = 0;
         var status = false;
         while (listContainsKey(this.table[index], key) && current !== null) {
             if (current.getData().key === key) {
-                this.table[index].removeAt(listIndex);
+                this.table[index].removeNode(current.getData());
                 status = true;
             }
             current = current.next;
-            listIndex++;
         }
         return status;
     };
