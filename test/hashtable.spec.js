@@ -106,8 +106,24 @@ describe('A Hash Table', function () {
             expect(ht.scGet('node')).to.equal(-1);
         });
 
-        it('removes all the keys from the hash table when using separate chaining');
-        it('returns false if asked to remove a key from the hash table that does not exist');
+        it('even if there are multiple values for the same key (separate chaining)',
+            function () {
+                ht.scPut('node', 'server-side js');
+                ht.scPut('node', 'this is another value');
+                ht.scPut('node', 'one last value to add...');
+                expect(ht.isEmpty()).to.be.false;
+                expect(ht.scRemove('node')).to.be.true;
+                expect(ht.scGet('node')).to.equal(-1);
+            });
+
+        it('or returns false if asked to remove a key that does not exist',
+            function () {
+                ht.scPut('node', 'server-side js');
+                ht.scPut('mongodb', 'noSQL database');
+                expect(ht.isEmpty()).to.be.false;
+                expect(ht.scRemove('express')).to.be.false;
+                expect(ht.scRemove('angularjs')).to.be.false;
+            });
 
     });
 
