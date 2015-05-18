@@ -1,3 +1,5 @@
+/* globals describe beforeEach it */
+
 var expect = require('chai').expect;
 var HashTable = require('../');
 
