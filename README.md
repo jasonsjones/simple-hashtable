@@ -18,21 +18,19 @@ A hash collision occurs when two different keys hash to the same value.
 If the collisions are not handled properly, the first value in the hash
 table will be overwritten by the second.
 
-There a few different ways that hash collisions can be handled.  One way is to
+Hash collisions can be handled using one of several techniques.  One way is to
 implement what is called
 [separate chaining](http://en.wikipedia.org/wiki/Hash_table#Separate_chaining).
-With separate chaining, instead
-of assigning a single value to the index (or hash), some sort of additional
-data structure is assigned, say a linked-list for example.  Then the payload
-(key/value pair) is added to the data structure based on its API.  So basically,
-the hash table becomes an array of data structures--a data structure of data
-structures.
-
-Separate chaining is not yet implemented here, but it is in the plan.
+With separate chaining, instead of assigning a single value to the index
+(or hash), some type of additional data structure is assigned, say a linked-list
+for example.  Then the payload (key/value pair) is added to the data structure
+based on the data structure's native API.  So basically, the hash table becomes
+an array of data structures--a data structure of data structures.
 
 Another method for resolving hash collisions is
 [linear probing](http://en.wikipedia.org/wiki/Linear_probing).  Linear probing
-will not be implemented within this project.
+is not implemented within this project; this implementation utilizes
+separate chaining to mitigate hash collisions.
 
 ----
 
