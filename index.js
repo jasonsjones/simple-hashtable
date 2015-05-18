@@ -181,6 +181,18 @@
         return this;
     };
 
+    /**
+     * Removes all the values in the hash table associated with the key.
+     * When using separate chaining there is the possibility that there may be
+     * more than one value for a specified key; however, this implementation
+     * will only return the last value assigned.  This remove method will remove
+     * all values from the hash table.
+     *
+     * @param {string} key the key to hash to determine the index to
+     *                 remove the value
+     *
+     * @returns {object} this for method chaining
+     */
     HashTable.prototype.scRemove = function (key) {
         var index = this.hashFn(key);
 
