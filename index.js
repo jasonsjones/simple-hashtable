@@ -90,11 +90,11 @@
      *
      * @returns {object} this for method chaining
      */
-    HashTable.prototype.put = function (key, value) {
-        var index = this.hashFn(key);
-        this.table[index] = value;
-        return this;
-    };
+    // HashTable.prototype.put = function (key, value) {
+    //     var index = this.hashFn(key);
+    //     this.table[index] = value;
+    //     return this;
+    // };
 
     /**
      * Puts the value in the hash table utilizing separate chaining to
@@ -108,7 +108,7 @@
      *
      * @returns {object} this for method chaining
      */
-    HashTable.prototype.scPut = function (key, value) {
+    HashTable.prototype.put = function (key, value) {
         var index = this.hashFn(key);
         if (this.table[index] === undefined) {
             this.table[index] = new LinkedList();
@@ -129,9 +129,9 @@
      *                 retrieve the value
      * @returns {number|string|object} the value associated the the key
      */
-    HashTable.prototype.get = function (key) {
-        return this.table[this.hashFn(key)];
-    };
+    // HashTable.prototype.get = function (key) {
+    //     return this.table[this.hashFn(key)];
+    // };
 
     /**
      * Gets the value in the hash table associated with the key.  This
@@ -142,7 +142,7 @@
      *                 retrieve the value
      * @returns {number|string|object} the value associated the the key
      */
-    HashTable.prototype.scGet = function (key) {
+    HashTable.prototype.get = function (key) {
         var index = this.hashFn(key);
         if (this.table[index] === undefined) {
             return -1;
@@ -176,10 +176,10 @@
      *
      * @returns {object} this for method chaining
      */
-    HashTable.prototype.remove = function (key) {
-        this.table[this.hashFn(key)] = undefined;
-        return this;
-    };
+    // HashTable.prototype.remove = function (key) {
+    //     this.table[this.hashFn(key)] = undefined;
+    //     return this;
+    // };
 
     /**
      * Removes all the values in the hash table associated with the key.
@@ -193,7 +193,7 @@
      *
      * @returns {object} this for method chaining
      */
-    HashTable.prototype.scRemove = function (key) {
+    HashTable.prototype.remove = function (key) {
         var index = this.hashFn(key);
 
         if (this.table[index] === undefined) {
