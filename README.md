@@ -50,6 +50,12 @@ var hashtable = new SimpleHashTable();
 hashtable.isEmpty();
 // --> true
 
+hashtable.put('node', 'asychronous, event-driven io for server side javascript')
+         .put('mongodb', 'noSQL database');
+// API supports method chaining for 'put' method
+
+hashtable.isEmpty();
+// --> false
 // more usage to follow...
 ```
 
