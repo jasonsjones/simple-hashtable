@@ -46,11 +46,11 @@
         var current = list.getHeadNode();
         while (current !== null) {
             if (current.getData().key === key) {
-                return true;
+                return current;
             }
             current = current.next;
         }
-        return false;
+        return null;
     }
 
     /**
@@ -114,10 +114,15 @@
             this.table[index] = new LinkedList();
         }
 
+        // check if the list already contains a node with the key.
+        // if it does, remove it, then insert the new key/value pair
+        var nodeWithKey = listContainsKey(this.table[index], key);
+
+        if (nodeWithKey !== null) {
+            this.remove(key);
+        }
+
         // append new key/value pair (obj) to the front of the linked list.
-        // adding the data to the front of the list will ensure that we
-        // return the latest value from the list in the event there are
-        // duplicate keys with differing values
         this.table[index].insertFirst(new ValuePair(key, value));
         return this;
     };
@@ -195,13 +200,13 @@
      */
     HashTable.prototype.remove = function (key) {
         var index = this.hashFn(key);
+        var status = false;
 
         if (this.table[index] === undefined) {
-            return false;
+            return status;
         }
 
         var current = this.table[index].getHeadNode();
-        var status = false;
         while (listContainsKey(this.table[index], key) && current !== null) {
             if (current.getData().key === key) {
                 this.table[index].removeNode(current.getData());
