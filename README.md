@@ -56,7 +56,25 @@ hashtable.put('node', 'asychronous, event-driven io for server side javascript')
 
 hashtable.isEmpty();
 // --> false
-// more usage to follow...
+
+hashtable.get('node');
+// --> asychronous, event-driven io for server side javascript
+
+hashtable.get('mongodb')
+// --> noSQL database
+
+hashtable.put('node', 'server side javascript');
+// overwrites old value with new value
+
+hashtable.get('node');
+// --> server side javascript
+
+hashtable.remove('mongodb');
+// --> true
+
+hashtable.get('mongodb');
+// --> -1
+
 ```
 
 ## API
