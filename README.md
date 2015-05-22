@@ -76,9 +76,21 @@ hashtable.get('mongodb');
 // --> -1
 
 ```
-
 ## API
-API still needs to be documented
+**Available methods for a Simple Hash Table instance:**
+
+* ### isEmpty()
+    Determines if the hash table is empty or not. Returns true if is empty, false
+    otherwise.
+
+* ### put(key, value)
+    Puts the value in the hash table and utilizes the key for lookup
+
+* ### get(key)
+    Gets the value from the hash table that is associated with the key
+
+* ### remove(key)
+    Removes the value from the hash table that is associated with the key
 
 ----
 ## License
