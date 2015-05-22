@@ -1,3 +1,5 @@
+# [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![dependency status][dm-image]][dm-url]
+
 # Simple Hash Table
 
 ## Description
@@ -95,3 +97,10 @@ hashtable.get('mongodb');
 ----
 ## License
 MIT &copy; Jason Jones
+
+[npm-image]:https://badge.fury.io/js/simple-hashtable.svg
+[npm-url]:http://npmjs.org/package/simple-hashtable
+[travis-image]:https://travis-ci.org/jasonsjones/simple-hashtable.svg
+[travis-url]:https://travis-ci.org/jasonsjones/simple-hashtable
+[dm-image]:https://david-dm.org/jasonsjones/simple-hashtable.svg
+[dm-url]:https://david-dm.org/jasonsjones/simple-hashtable
