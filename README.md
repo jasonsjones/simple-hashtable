@@ -29,10 +29,22 @@ for example.  Then the payload (key/value pair) is added to the data structure
 based on the data structure's native API.  So basically, the hash table becomes
 an array of data structures--a data structure of data structures.
 
+This project implements separate chaining to mitigate hash collisions.
+
 Another method for resolving hash collisions is
 [linear probing](http://en.wikipedia.org/wiki/Linear_probing).  Linear probing
-is not implemented within this project; this implementation utilizes
-separate chaining to mitigate hash collisions.
+is not implemented in this project.
+
+*For specific examples and documentation, see the below sections*
+
+#### Environment:
+
+Although this implementation is designed to be used with
+[Node.js](http://www.nodejs.org), it could be used in other contexts with minor
+modifications.  This implementation does not have any external dependencies
+that would preclude it from being used in the browser--just include it with a
+`<script>` tag and it should be good to go.  _Disclaimer: I have not tested
+this implementation in any other context/environment; only tested with node.js_
 
 ----
 
