@@ -11,55 +11,11 @@
     var LinkedList = require('singly-linked-list');
 
     /**
-     * Simple hash function.  Hashes the key to returns a value which
-     * will be used to index into the table array. This hash function is very
-     * susceptible to a hash collision
-     *
-     * @param {string} key the key to hash
-     * @return {number} the hash value to use as index
-     */
-    // function loseloseHashCode(key) {
-    //     var hashValue = 0;
-    //     for (var i = 0, len = key.length; i < len; i++) {
-    //         hashValue += key.charCodeAt(i);
-    //     }
-    //     return hashValue % 42;
-    // }
-
-    /**
-     * Improved hash function.  Hashes the key to returns a value which
-     * will be used to index into the table array.  Better distribution of
-     * hash values than the lose lose hash function.
-     *
-     * @param {string} key the key to hash
-     * @return {number} the hash value to use as index
-     */
-    function djb2HashCode(key) {
-        var hashValue = 5381;
-        for (var i = 0; i < key.length; i++) {
-            hashValue = hashValue * 33 + key.charCodeAt(i);
-        }
-        return hashValue % 1013;
-    }
-
-    function listContainsKey(list, key) {
-        var current = list.getHeadNode();
-        while (current !== null) {
-            if (current.getData().key === key) {
-                return current;
-            }
-            current = current.next;
-        }
-        return null;
-    }
-
-    /**
-     * Creates a new simple hash table instance
+     * Creates a new hash table instance
      *
      * @constructor
      */
-    function HashTable() {
-        this.table = [];
+    function HashTable() { this.table = [];
         this.hashFn = djb2HashCode; // or loseloseHashCode
     }
 
@@ -219,4 +175,59 @@
 
     // expose HashTable
     module.exports = HashTable;
+
+    /*********************** Utility Functions ********************************/
+
+    /**
+     * Simple hash function.  Hashes the key to returns a value which
+     * will be used to index into the table array. This hash function is very
+     * susceptible to a hash collision
+     *
+     * @param {string} key the key to hash
+     * @return {number} the hash value to use as index
+     */
+    // function loseloseHashCode(key) {
+    //     var hashValue = 0;
+    //     for (var i = 0, len = key.length; i < len; i++) {
+    //         hashValue += key.charCodeAt(i);
+    //     }
+    //     return hashValue % 42;
+    // }
+
+    /**
+     * Improved hash function.  Hashes the key to returns a value which
+     * will be used to index into the table array.  Better distribution of
+     * hash values than the lose lose hash function.
+     *
+     * @param {string} key the key to hash
+     * @return {number} the hash value to use as index
+     */
+    function djb2HashCode(key) {
+        var hashValue = 5381;
+        for (var i = 0; i < key.length; i++) {
+            hashValue = hashValue * 33 + key.charCodeAt(i);
+        }
+        return hashValue % 1013;
+    }
+
+    /**
+     * Determines if a linked list contains a key.
+     *
+     * @param {object} list the linked list to check if it contains the key
+     * @param {string} key the key to use to determine if it is contained in
+     *                  the list
+     * @return {object|null} the linked list node that contains the key;
+     *                       null otherwise
+     */
+    function listContainsKey(list, key) {
+        var current = list.getHeadNode();
+        while (current !== null) {
+            if (current.getData().key === key) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+    /************************ End Utility Functions ***************************/
 }());
