@@ -64,7 +64,7 @@ describe('A Hash Table', function () {
 
     describe('removes the correct value from the hash table', function () {
 
-        it('using the remove method', function () {
+        it('when given a key in the table', function () {
             ht.put('node', 'server-side js')
               .put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
