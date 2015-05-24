@@ -66,6 +66,14 @@ describe('A Hash Table', function () {
             expect(ht.get('express')).to.equal(-1);
         });
 
+        it('when the value is a complex object', function () {
+            ht.put('me', {name: 'jason jones', email: 'me@jasonjones.com'});
+            expect(ht.isEmpty()).to.be.false;
+            expect(ht.size()).to.equal(1);
+            console.log(ht.get('me'));
+            expect(ht.get('me')).to.have.all.keys('name', 'email');
+        });
+
         it('where the value was re-assigned', function () {
             ht.put('node', 'bogus value');
             ht.put('node', 'server-side js');
