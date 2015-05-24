@@ -62,6 +62,24 @@
         this._size = 0;
     };
 
+    HashTable.prototype.containsKey = function (key) {
+        var index = this.hashFn(key);
+
+        if (this.table[index] === undefined) {
+            return false;
+        }
+
+        var current = this.table[index].getHeadNode();
+        while (current !== null) {
+            if (current.getData().key === key) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+
+    };
+
     /**
      * Puts the value in the hash table utilizing separate chaining to
      * handle hash collisions.  Hashes the key to determine

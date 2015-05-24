@@ -70,7 +70,6 @@ describe('A Hash Table', function () {
             ht.put('me', {name: 'jason jones', email: 'me@jasonjones.com'});
             expect(ht.isEmpty()).to.be.false;
             expect(ht.size()).to.equal(1);
-            console.log(ht.get('me'));
             expect(ht.get('me')).to.have.all.keys('name', 'email');
         });
 
@@ -120,5 +119,20 @@ describe('A Hash Table', function () {
                 expect(ht.remove('express')).to.be.false;
                 expect(ht.remove('angularjs')).to.be.false;
             });
+    });
+
+    describe('correctly determines if a key is in the table', function () {
+        it('for a key that is contained in the table', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database');
+            expect(ht.containsKey('node')).to.be.true;
+            expect(ht.containsKey('mongodb')).to.be.true;
+        });
+
+        it('for a key that is not contained in the table', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database');
+            expect(ht.containsKey('express')).to.be.false;
+        });
     });
 });
