@@ -15,7 +15,9 @@
      *
      * @constructor
      */
-    function HashTable() { this.table = [];
+    function HashTable() {
+        this.table = [];
+        this._size = 0;
         this.hashFn = djb2HashCode; // or loseloseHashCode
     }
 
@@ -33,7 +35,7 @@
      * @returns {boolean} true if hash table is empty, false otherwise
      */
     HashTable.prototype.isEmpty  = function () {
-        return this.table.length === 0;
+        return this._size === 0;
     };
 
     /**
@@ -51,6 +53,14 @@
     //     this.table[index] = value;
     //     return this;
     // };
+
+    /**
+     * Clears the hash table of all keys and values
+     */
+    HashTable.prototype.clear = function () {
+        this.table = [];
+        this._size = 0;
+    };
 
     /**
      * Puts the value in the hash table utilizing separate chaining to
@@ -80,6 +90,7 @@
 
         // append new key/value pair (obj) to the front of the linked list.
         this.table[index].insertFirst(new ValuePair(key, value));
+        this._size++;
         return this;
     };
 
@@ -166,11 +177,21 @@
         while (listContainsKey(this.table[index], key) && current !== null) {
             if (current.getData().key === key) {
                 this.table[index].removeNode(current.getData());
+                this._size--;
                 status = true;
             }
             current = current.next;
         }
         return status;
+    };
+
+    /**
+     * Returns the number of keys in the hash table
+     *
+     * @return {number} the number of keys in the hash table
+     */
+    HashTable.prototype.size = function () {
+        return this._size;
     };
 
     // expose HashTable

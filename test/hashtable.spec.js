@@ -18,16 +18,29 @@ describe('A Hash Table', function () {
         expect(ht.isEmpty()).to.be.true;
     });
 
+    it('clears the table of all keys', function () {
+        ht.put('node', 'server-side js')
+          .put('mongodb', 'noSQL database')
+          .put('express', 'webframework on top of node');
+        expect(ht.size()).to.equal(3);
+        expect(ht.isEmpty()).to.be.false;
+        ht.clear();
+        expect(ht.size()).to.equal(0);
+        expect(ht.isEmpty()).to.be.true;
+    });
+
     describe('hashes a key and puts the value in the hash table', function () {
 
         it('using single put call', function () {
             ht.put('node', 'asychronous, event-driven io for server side javascript');
+            expect(ht.size()).to.equal(1);
             expect(ht.isEmpty()).to.be.false;
         });
 
         it('using the fluent/cascading API', function () {
             ht.put('node', 'server-side js')
               .put('mongodb', 'noSQL database');
+            expect(ht.size()).to.equal(2);
             expect(ht.isEmpty()).to.be.false;
         });
 
@@ -39,6 +52,7 @@ describe('A Hash Table', function () {
             ht.put('node', 'server-side js');
             ht.put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
+            expect(ht.size()).to.equal(2);
             expect(ht.get('node')).to.equal('server-side js');
             expect(ht.get('mongodb')).to.equal('noSQL database');
         });
@@ -47,6 +61,7 @@ describe('A Hash Table', function () {
             ht.put('node', 'server-side js');
             ht.put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
+            expect(ht.size()).to.equal(2);
             expect(ht.get('node')).to.equal('server-side js');
             expect(ht.get('express')).to.equal(-1);
         });
@@ -56,6 +71,7 @@ describe('A Hash Table', function () {
             ht.put('node', 'server-side js');
             ht.put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
+            expect(ht.size()).to.equal(2);
             expect(ht.get('node')).to.equal('server-side js');
             expect(ht.get('mongodb')).to.equal('noSQL database');
         });
@@ -69,7 +85,9 @@ describe('A Hash Table', function () {
               .put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
             ht.remove('node');
+            expect(ht.size()).to.equal(1);
             ht.remove('mongodb');
+            expect(ht.size()).to.equal(0);
             expect(ht.get('node')).to.equal(-1);
             expect(ht.get('mongodb')).to.equal(-1);
         });
@@ -80,6 +98,7 @@ describe('A Hash Table', function () {
                 ht.put('node', 'this is another value');
                 ht.put('node', 'one last value to add...');
                 expect(ht.isEmpty()).to.be.false;
+                expect(ht.size()).to.equal(1);
                 expect(ht.remove('node')).to.be.true;
                 expect(ht.get('node')).to.equal(-1);
             });
@@ -89,6 +108,7 @@ describe('A Hash Table', function () {
                 ht.put('node', 'server-side js');
                 ht.put('mongodb', 'noSQL database');
                 expect(ht.isEmpty()).to.be.false;
+                expect(ht.size()).to.equal(2);
                 expect(ht.remove('express')).to.be.false;
                 expect(ht.remove('angularjs')).to.be.false;
             });
