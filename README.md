@@ -71,11 +71,26 @@ hashtable.put('node', 'asychronous, event-driven io for server side javascript')
 hashtable.isEmpty();
 // --> false
 
+hashtable.size();
+// --> 2
+
+hashtable.containsKey('node');
+// --> true
+
+hashtable.containsKey('express');
+// --> false
+
+hashtable.containsValue('noSQL database');
+// --> true;
+
 hashtable.get('node');
 // --> asychronous, event-driven io for server side javascript
 
 hashtable.get('mongodb')
 // --> noSQL database
+
+hashtable.keys();
+// --> ['node', 'mongodb']
 
 hashtable.put('node', 'server side javascript');
 // overwrites old value with new value
@@ -88,6 +103,13 @@ hashtable.remove('mongodb');
 
 hashtable.get('mongodb');
 // --> -1
+
+hashtable.size();
+// --> 1
+
+hashtable.clear();
+hashtable.isEmpty();
+// --> true
 
 ```
 ## API
