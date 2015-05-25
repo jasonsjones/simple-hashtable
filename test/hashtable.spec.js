@@ -21,52 +21,75 @@ describe('A Hash Table', function () {
         });
     });
 
-    it('clears the table of all keys', function () {
-        ht.put('node', 'server-side js')
-          .put('mongodb', 'noSQL database')
-          .put('express', 'webframework on top of node');
-        expect(ht.size()).to.equal(3);
-        expect(ht.isEmpty()).to.be.false;
-        ht.clear();
-        expect(ht.size()).to.equal(0);
-        expect(ht.isEmpty()).to.be.true;
+    describe('clear method', function () {
+        it('clears the table of all keys', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database')
+              .put('express', 'webframework on top of node');
+            expect(ht.size()).to.equal(3);
+            expect(ht.isEmpty()).to.be.false;
+            ht.clear();
+            expect(ht.size()).to.equal(0);
+            expect(ht.isEmpty()).to.be.true;
+        });
     });
 
-    it('returns array of all the keys in the table', function () {
-        ht.put('node', 'server-side js')
-          .put('mongodb', 'noSQL database')
-          .put('angularjs', 'client side MV* framework')
-          .put('express', 'webframework on top of node');
-        var keys = ht.keys();
-        expect(keys).to.be.Array;
-        expect(keys).to.have.length(4);
-        expect(keys).to.include('node');
+    describe('keys method', function () {
+
+        it('returns array of all the keys in the table', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database')
+              .put('angularjs', 'client side MV* framework')
+              .put('express', 'webframework on top of node');
+            var keys = ht.keys();
+            expect(keys).to.be.Array;
+            expect(keys).to.have.length(4);
+            expect(keys).to.include('node');
+        });
+
+        it('returns empty array of keys if table is empty', function () {
+            var keys = ht.keys();
+            expect(keys).to.be.empty;
+            expect(keys).to.be.Array;
+            expect(keys).to.have.length(0);
+        });
+
     });
 
-    it('returns empty array of keys if table is empty', function () {
-        var keys = ht.keys();
-        expect(keys).to.be.empty;
-        expect(keys).to.be.Array;
-        expect(keys).to.have.length(0);
+    describe('containsKey method', function () {
+        it('determines if a key is in the hash table', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database');
+            expect(ht.containsKey('node')).to.be.true;
+            expect(ht.containsKey('mongodb')).to.be.true;
+        });
+
+        it('returns false if key is not in hash table', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database');
+            expect(ht.containsKey('express')).to.be.false;
+        });
     });
 
-    it('determines if a value is in the hash table', function () {
-        ht.put('node', 'server-side js')
-          .put('mongodb', 'noSQL database')
-          .put('angularjs', 'client side MV* framework')
-          .put('express', 'webframework on top of node');
+    describe('containsValue method', function () {
+        it('determines if a value is in the hash table', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database')
+              .put('angularjs', 'client side MV* framework')
+              .put('express', 'webframework on top of node');
 
-        expect(ht.containsValue('server-side js')).to.be.true;
-        expect(ht.containsValue('noSQL database')).to.be.true;
-        expect(ht.containsValue('this is not there...')).to.be.false;
+            expect(ht.containsValue('server-side js')).to.be.true;
+            expect(ht.containsValue('noSQL database')).to.be.true;
+            expect(ht.containsValue('this is not there...')).to.be.false;
+        });
+
+        it('determines if a complex object is in the hash table', function () {
+            ht.put('me', {name: 'jason jones', email: 'me@jasonjones.com'});
+            expect(ht.containsValue({name: 'jason jones', email: 'me@jasonjones.com'})).to.be.true;
+        });
     });
 
-    it('determines if a complex object is in the hash table', function () {
-        ht.put('me', {name: 'jason jones', email: 'me@jasonjones.com'});
-        expect(ht.containsValue({name: 'jason jones', email: 'me@jasonjones.com'})).to.be.true;
-    });
-
-    describe('Put method', function () {
+    describe('put method', function () {
 
         it('adds a value to the hash table', function () {
             ht.put('node', 'asychronous, event-driven io for server side javascript');
@@ -82,9 +105,9 @@ describe('A Hash Table', function () {
         });
     });
 
-    describe('gets the correct value when given a key', function () {
+    describe('get method', function () {
 
-        it('that is contained in the hash table', function () {
+        it('gets the value associated with a key', function () {
             ht.put('node', 'server-side js');
             ht.put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
@@ -93,7 +116,7 @@ describe('A Hash Table', function () {
             expect(ht.get('mongodb')).to.equal('noSQL database');
         });
 
-        it('that does not exist in the hash table', function () {
+        it('returns -1 if the key does not exist in the hash table', function () {
             ht.put('node', 'server-side js');
             ht.put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
@@ -102,14 +125,16 @@ describe('A Hash Table', function () {
             expect(ht.get('express')).to.equal(-1);
         });
 
-        it('when the value is a complex object', function () {
+        it('returns correct value even if its a complex object', function () {
             ht.put('me', {name: 'jason jones', email: 'me@jasonjones.com'});
             expect(ht.isEmpty()).to.be.false;
             expect(ht.size()).to.equal(1);
-            expect(ht.get('me')).to.have.all.keys('name', 'email');
+            var obj = ht.get('me');
+            expect(obj).to.be.Object;
+            expect(obj).to.have.all.keys('name', 'email');
         });
 
-        it('where the value was re-assigned', function () {
+        it('gets the value that was last assigned', function () {
             ht.put('node', 'bogus value');
             ht.put('node', 'server-side js');
             ht.put('mongodb', 'noSQL database');
@@ -121,9 +146,9 @@ describe('A Hash Table', function () {
 
     });
 
-    describe('removes the correct value from the hash table', function () {
+    describe('remove method', function () {
 
-        it('when given a key in the table', function () {
+        it('removes entry when given a key in the table', function () {
             ht.put('node', 'server-side js')
               .put('mongodb', 'noSQL database');
             expect(ht.isEmpty()).to.be.false;
@@ -135,7 +160,7 @@ describe('A Hash Table', function () {
             expect(ht.get('mongodb')).to.equal(-1);
         });
 
-        it('even if there are multiple values for the same key (separate chaining)',
+        it('removes all entries for the same key (separate chaining)',
             function () {
                 ht.put('node', 'server-side js');
                 ht.put('node', 'this is another value');
@@ -146,29 +171,14 @@ describe('A Hash Table', function () {
                 expect(ht.get('node')).to.equal(-1);
             });
 
-        it('or returns false if asked to remove a key that does not exist',
-            function () {
-                ht.put('node', 'server-side js');
-                ht.put('mongodb', 'noSQL database');
-                expect(ht.isEmpty()).to.be.false;
-                expect(ht.size()).to.equal(2);
-                expect(ht.remove('express')).to.be.false;
-                expect(ht.remove('angularjs')).to.be.false;
-            });
-    });
-
-    describe('correctly determines if a key is in the table', function () {
-        it('for a key that is contained in the table', function () {
-            ht.put('node', 'server-side js')
-              .put('mongodb', 'noSQL database');
-            expect(ht.containsKey('node')).to.be.true;
-            expect(ht.containsKey('mongodb')).to.be.true;
-        });
-
-        it('for a key that is not contained in the table', function () {
-            ht.put('node', 'server-side js')
-              .put('mongodb', 'noSQL database');
-            expect(ht.containsKey('express')).to.be.false;
+        it('returns false if key does not exist in hash table', function () {
+            ht.put('node', 'server-side js');
+            ht.put('mongodb', 'noSQL database');
+            expect(ht.isEmpty()).to.be.false;
+            expect(ht.size()).to.equal(2);
+            expect(ht.remove('express')).to.be.false;
+            expect(ht.remove('angularjs')).to.be.false;
         });
     });
+
 });
