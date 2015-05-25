@@ -119,6 +119,12 @@ hashtable.isEmpty();
     Determines if the hash table is empty or not. Returns true if is empty, false
     otherwise.
 
+* ### clear()
+    Clears all entries in the hash table
+
+* ### size()
+    Returns the number of keys in the hash table
+
 * ### put(key, value)
     Puts the value in the hash table and utilizes the key for lookup
 
@@ -127,6 +133,15 @@ hashtable.isEmpty();
 
 * ### remove(key)
     Removes the value from the hash table that is associated with the key
+
+* ### containsKey(key)
+    Determines whether or not the hash table contains the key
+
+* ### containsValue(value)
+    Determines whether or not the hash table contains the value
+
+* ### keys()
+    Returns an array of all the keys in the hash table
 
 ----
 ## License
