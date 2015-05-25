@@ -62,6 +62,13 @@
         this._size = 0;
     };
 
+    /**
+     * Determines whether or not the hash table contains the given key
+     *
+     * @param {string} key the key to find in the hash table
+     * @return {boolean} true if the key is contained in the hash table,
+     *                   false otherwise
+     */
     HashTable.prototype.containsKey = function (key) {
         var index = this.hashFn(key);
 
