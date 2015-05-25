@@ -9,6 +9,7 @@
 
     var ValuePair = require('./lib/valuePair');
     var LinkedList = require('singly-linked-list');
+    var _ = require('lodash');
 
     /**
      * Creates a new hash table instance
@@ -85,6 +86,32 @@
         }
         return false;
 
+    };
+
+    /**
+     * Determines whether or not the hash table contains the given value
+     *
+     * @param {object|string} value the value to find in the hash table
+     * @return {boolean} true if the value is contained in the hash table,
+     *                   false otherwise
+     */
+    HashTable.prototype.containsValue = function (value) {
+        var current = null;
+        for (var i = 0; i < this.table.length; i++) {
+            if (this.table[i] === undefined) {
+                continue;
+            } else {
+                current = this.table[i].getHeadNode();
+                while (current !== null) {
+                    var currentValue = current.getData().value;
+                    if (_.isEqual(currentValue, value)) {
+                        return true;
+                    }
+                    current = current.next;
+                }
+            }
+        }
+        return false;
     };
 
     /**

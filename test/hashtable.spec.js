@@ -9,13 +9,16 @@ describe('A Hash Table', function () {
         ht = new HashTable();
     });
 
-    it('has a working test framework', function () {
-        expect(true).to.be.true;
-    });
+    describe('basic setup', function () {
 
-    it('correctly instantiates an instance with an empty table', function () {
-        expect(ht).to.exist;
-        expect(ht.isEmpty()).to.be.true;
+        it('has a working test framework', function () {
+            expect(true).to.be.true;
+        });
+
+        it('correctly instantiates an instance with an empty table', function () {
+            expect(ht).to.exist;
+            expect(ht.isEmpty()).to.be.true;
+        });
     });
 
     it('clears the table of all keys', function () {
@@ -47,21 +50,36 @@ describe('A Hash Table', function () {
         expect(keys).to.have.length(0);
     });
 
-    describe('hashes a key and puts the value in the hash table', function () {
+    it('determines if a value is in the hash table', function () {
+        ht.put('node', 'server-side js')
+          .put('mongodb', 'noSQL database')
+          .put('angularjs', 'client side MV* framework')
+          .put('express', 'webframework on top of node');
 
-        it('using single put call', function () {
+        expect(ht.containsValue('server-side js')).to.be.true;
+        expect(ht.containsValue('noSQL database')).to.be.true;
+        expect(ht.containsValue('this is not there...')).to.be.false;
+    });
+
+    it('determines if a complex object is in the hash table', function () {
+        ht.put('me', {name: 'jason jones', email: 'me@jasonjones.com'});
+        expect(ht.containsValue({name: 'jason jones', email: 'me@jasonjones.com'})).to.be.true;
+    });
+
+    describe('Put method', function () {
+
+        it('adds a value to the hash table', function () {
             ht.put('node', 'asychronous, event-driven io for server side javascript');
             expect(ht.size()).to.equal(1);
             expect(ht.isEmpty()).to.be.false;
         });
 
-        it('using the fluent/cascading API', function () {
+        it('adds values to the hash table using cascading calls', function () {
             ht.put('node', 'server-side js')
               .put('mongodb', 'noSQL database');
             expect(ht.size()).to.equal(2);
             expect(ht.isEmpty()).to.be.false;
         });
-
     });
 
     describe('gets the correct value when given a key', function () {
