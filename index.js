@@ -166,6 +166,28 @@
     };
 
     /**
+     * Returns an array of all the keys in the hash table
+     *
+     * @return {array} the keys in the hash table
+     */
+    HashTable.prototype.keys = function () {
+        var keys = [];
+        var current = null;
+        for (var i = 0; i < this.table.length; i++) {
+            if (this.table[i] === undefined) {
+                continue;
+            } else {
+                current = this.table[i].getHeadNode();
+                while (current !== null) {
+                    keys.push(current.getData().key);
+                    current = current.next;
+                }
+            }
+        }
+        return keys;
+    };
+
+    /**
      * Removes the value in the hash table associated with the key
      *
      * @param {string} key the key to hash to determine the index to

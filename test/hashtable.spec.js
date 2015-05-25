@@ -29,6 +29,24 @@ describe('A Hash Table', function () {
         expect(ht.isEmpty()).to.be.true;
     });
 
+    it('returns array of all the keys in the table', function () {
+        ht.put('node', 'server-side js')
+          .put('mongodb', 'noSQL database')
+          .put('angularjs', 'client side MV* framework')
+          .put('express', 'webframework on top of node');
+        var keys = ht.keys();
+        expect(keys).to.be.Array;
+        expect(keys).to.have.length(4);
+        expect(keys).to.include('node');
+    });
+
+    it('returns empty array of keys if table is empty', function () {
+        var keys = ht.keys();
+        expect(keys).to.be.empty;
+        expect(keys).to.be.Array;
+        expect(keys).to.have.length(0);
+    });
+
     describe('hashes a key and puts the value in the hash table', function () {
 
         it('using single put call', function () {
