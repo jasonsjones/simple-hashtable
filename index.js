@@ -7,8 +7,14 @@
 (function () {
     'use strict';
 
+    // helper module to encapsulate a key/value pair
     var ValuePair = require('./lib/valuePair');
+
+    // singly linked-list to use at each hash value to mitigate
+    // hash collisions
     var LinkedList = require('singly-linked-list');
+
+    // lodash utility module
     var _ = require('lodash');
 
     /**
@@ -19,6 +25,8 @@
     function HashTable() {
         this.table = [];
         this._size = 0;
+
+        // reference to hash function
         this.hashFn = djb2HashCode; // or loseloseHashCode
     }
 
@@ -71,21 +79,31 @@
      *                   false otherwise
      */
     HashTable.prototype.containsKey = function (key) {
+        // get the hash of the key to determine where to index in table
         var index = this.hashFn(key);
 
+        // if that particular table index is undefined, no linked-list exist,
+        // therefore there is no key assigned
         if (this.table[index] === undefined) {
             return false;
         }
 
+        // get a reference to the head node of the linked-list
         var current = this.table[index].getHeadNode();
+
+        // iterate over the list until the end is reached
         while (current !== null) {
+            // if the key matches, success
             if (current.getData().key === key) {
                 return true;
             }
+
+            // get the next node
             current = current.next;
         }
+        // if we get here, the key is not found in the linked-list associated
+        // with the index
         return false;
-
     };
 
     /**
@@ -96,21 +114,44 @@
      *                   false otherwise
      */
     HashTable.prototype.containsValue = function (value) {
+        // initialize current node to null
         var current = null;
+
+        // since we don't have the key, we cannot take advantage of the lookup
+        // efficiencies of the hash table, so we must iterate over the entire
+        // table (array)
         for (var i = 0; i < this.table.length; i++) {
+            // if the value of the table at index i is undefined, obviously
+            // no linked-list is present, therefore no value(s) to find, so
+            // we move on
             if (this.table[i] === undefined) {
                 continue;
+
+            // there is a value in the table at index i
             } else {
+
+                // get a reference to the head node of the linked-list
                 current = this.table[i].getHeadNode();
+
+                // iterate over the linked-list
                 while (current !== null) {
+                    // get reference to the current node's value
                     var currentValue = current.getData().value;
+
+                    // if the current node's value is equal to what we are
+                    // looking for--success
                     if (_.isEqual(currentValue, value)) {
                         return true;
                     }
+
+                    // didn't find the value at the current node, so move to
+                    // the next
                     current = current.next;
                 }
             }
         }
+
+        // if we got this far, the value was not found in the hash table
         return false;
     };
 
