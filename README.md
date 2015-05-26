@@ -64,7 +64,7 @@ var hashtable = new SimpleHashTable();
 hashtable.isEmpty();
 // --> true
 
-hashtable.put('node', 'asychronous, event-driven io for server side javascript')
+hashtable.put('node', 'asynchronous, event-driven io for server side javascript')
          .put('mongodb', 'noSQL database');
 // API supports method chaining for 'put' method
 
@@ -84,13 +84,17 @@ hashtable.containsValue('noSQL database');
 // --> true;
 
 hashtable.get('node');
-// --> asychronous, event-driven io for server side javascript
+// --> asynchronous, event-driven io for server side javascript
 
 hashtable.get('mongodb')
 // --> noSQL database
 
 hashtable.keys();
 // --> ['node', 'mongodb']
+
+hashtable.values();
+// --> ['asynchronous, event-driven io for server side javascript',
+//      'noSQL database']
 
 hashtable.put('node', 'server side javascript');
 // overwrites old value with new value
