@@ -143,6 +143,9 @@ hashtable.isEmpty();
 * ### keys()
     Returns an array of all the keys in the hash table
 
+* ### values()
+    Returns an array of all the values in the hash table
+
 ----
 ## License
 MIT &copy; Jason Jones
