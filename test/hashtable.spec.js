@@ -181,4 +181,23 @@ describe('A Hash Table', function () {
         });
     });
 
+    describe('values method', function () {
+        it('returns array of all the values in the table', function () {
+            ht.put('node', 'server-side js')
+              .put('mongodb', 'noSQL database')
+              .put('angularjs', 'client side MV* framework')
+              .put('express', 'webframework on top of node');
+            var values = ht.values();
+            expect(values).to.be.Array;
+            expect(values).to.have.length(4);
+            expect(values).to.include('client side MV* framework');
+        });
+
+        it('returns empty array of keys if table is empty', function () {
+            var values = ht.values();
+            expect(values).to.be.empty;
+            expect(values).to.be.Array;
+            expect(values).to.have.length(0);
+        });
+    });
 });

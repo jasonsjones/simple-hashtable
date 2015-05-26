@@ -268,6 +268,27 @@
         return this._size;
     };
 
+    /**
+     * Returns an array of all the values in the hash table
+     *
+     * @return {array} the values in the hash table
+     */
+    HashTable.prototype.values = function () {
+        var values = [];
+        var current = null;
+        for (var i = 0; i < this.table.length; i++) {
+            if (this.table[i] === undefined) {
+                continue;
+            } else {
+                current = this.table[i].getHeadNode();
+                while (current !== null) {
+                    values.push(current.getData().value);
+                    current = current.next;
+                }
+            }
+        }
+        return values;
+    };
     // expose HashTable
     module.exports = HashTable;
 
