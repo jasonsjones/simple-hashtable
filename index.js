@@ -48,22 +48,6 @@
     };
 
     /**
-     * Puts the value in the hash table.  Hashes the key to determine
-     * the index in the hash table to assign the value.
-     *
-     * @param {string} key the key to hash to determine the index
-     * @param {number|string|object} value the value to associate with
-     *          the key/hash in the hash table
-     *
-     * @returns {object} this for method chaining
-     */
-    // HashTable.prototype.put = function (key, value) {
-    //     var index = this.hashFn(key);
-    //     this.table[index] = value;
-    //     return this;
-    // };
-
-    /**
      * Clears the hash table of all keys and values
      */
     HashTable.prototype.clear = function () {
@@ -188,17 +172,6 @@
     };
 
     /**
-     * Gets the value in the hash table based on the hash of the key
-     *
-     * @param {string} key the key to hash to determine the index to
-     *                 retrieve the value
-     * @returns {number|string|object} the value associated the the key
-     */
-    // HashTable.prototype.get = function (key) {
-    //     return this.table[this.hashFn(key)];
-    // };
-
-    /**
      * Gets the value in the hash table associated with the key.  This
      * version utilizes separate chaining to search for the key in the
      * respective linked-list.
@@ -241,19 +214,6 @@
     HashTable.prototype.keys = function () {
         return getArrayOf(this, 'keys');
     };
-
-    /**
-     * Removes the value in the hash table associated with the key
-     *
-     * @param {string} key the key to hash to determine the index to
-     *                 remove the value
-     *
-     * @returns {object} this for method chaining
-     */
-    // HashTable.prototype.remove = function (key) {
-    //     this.table[this.hashFn(key)] = undefined;
-    //     return this;
-    // };
 
     /**
      * Removes all the values in the hash table associated with the key.
