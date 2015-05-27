@@ -21,13 +21,14 @@
      * Creates a new hash table instance
      *
      * @constructor
+     * @param {function} fn the hash function to use for the hash table
      */
-    function HashTable() {
+    function HashTable(fn) {
         this.table = [];
         this._size = 0;
 
         // reference to hash function
-        this.hashFn = djb2HashCode; // or loseloseHashCode
+        this.hashFn = fn || djb2HashCode; // or loseloseHashCode
     }
 
     /*
@@ -273,6 +274,22 @@
      */
     HashTable.prototype.size = function () {
         return this._size;
+    };
+
+    /**
+     * Sets the hash function to fn.  This needs to be done before any
+     * key/value pairs are added to the hash table in order to maintain
+     * consistence.  Otherwise, the methods that rely on hashing a key
+     * (get/remove) to take some action on the result will not yield the
+     * correct hash, therefore will be unable to lookup the value in the
+     * hash table.
+     *
+     * @param {function} fn the hash function to use for the hash table
+     */
+    HashTable.prototype.setHashFn = function (fn) {
+        if (fn instanceof Function && this.isEmpty()) {
+            this.hashFn = fn;
+        }
     };
 
     /**

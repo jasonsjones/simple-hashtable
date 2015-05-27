@@ -5,6 +5,14 @@ var HashTable = require('../');
 describe('A Hash Table', function () {
     var ht;
 
+    function loseloseHashCode(key) {
+        var hashValue = 0;
+        for (var i = 0, len = key.length; i < len; i++) {
+            hashValue += key.charCodeAt(i);
+        }
+        return hashValue % 42;
+    }
+
     beforeEach(function () {
         ht = new HashTable();
     });
@@ -198,6 +206,26 @@ describe('A Hash Table', function () {
             expect(values).to.be.empty;
             expect(values).to.be.Array;
             expect(values).to.have.length(0);
+        });
+    });
+
+    describe('setHashFn method', function () {
+        it('sets the hash function for the hash table', function () {
+            ht.setHashFn(loseloseHashCode);
+            expect(ht.hashFn).to.exist;
+            expect(ht.hashFn).to.equal(loseloseHashCode);
+        });
+
+        it('does not set hash fn if table is not empty', function () {
+            ht.put('node', 'server side javascript');
+            ht.setHashFn(loseloseHashCode);
+            expect(ht.hashFn).to.not.equal(loseloseHashCode);
+            expect(ht.hashFn.name).to.equal('djb2HashCode');
+        });
+
+        it('does not set hash fn if parameter is not a function', function () {
+            ht.setHashFn('loseloseHashCode');
+            expect(ht.hashFn.name).to.equal('djb2HashCode');
         });
     });
 });
