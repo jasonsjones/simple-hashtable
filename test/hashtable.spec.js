@@ -193,7 +193,7 @@ describe('A Hash Table', function () {
             expect(values).to.include('client side MV* framework');
         });
 
-        it('returns empty array of keys if table is empty', function () {
+        it('returns empty array of values if table is empty', function () {
             var values = ht.values();
             expect(values).to.be.empty;
             expect(values).to.be.Array;
