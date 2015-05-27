@@ -53,7 +53,6 @@ this implementation in any other context/environment; only tested with node.js_
 Install with npm :
 
 ```bash
-# not yet published to npm
 npm install simple-hashtable --save
 ```
 
@@ -117,7 +116,7 @@ hashtable.isEmpty();
 
 ```
 ## API
-**Available methods for a Simple Hash Table instance:**
+**Available methods for a Hash Table instance:**
 
 * ### isEmpty()
     Determines if the hash table is empty or not. Returns true if is empty, false
