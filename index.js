@@ -152,7 +152,12 @@
      * @returns {object} this for method chaining
      */
     HashTable.prototype.put = function (key, value) {
+
+        // hash the key to get the index
         var index = this.hashFn(key);
+
+        // if the table entry at index is undefined, we need to instantiate
+        // a new linked-list to hold the key/value pairs
         if (this.table[index] === undefined) {
             this.table[index] = new LinkedList();
         }
@@ -168,6 +173,8 @@
         // append new key/value pair (obj) to the front of the linked list.
         this.table[index].insertFirst(new ValuePair(key, value));
         this._size++;
+
+        // allow method chaining/cascading API
         return this;
     };
 
@@ -181,6 +188,7 @@
      * @returns {number|string|object} the value associated the the key
      */
     HashTable.prototype.get = function (key) {
+        // hash the key to get the index
         var index = this.hashFn(key);
         if (this.table[index] === undefined) {
             return -1;
