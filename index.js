@@ -239,20 +239,7 @@
      * @return {array} the keys in the hash table
      */
     HashTable.prototype.keys = function () {
-        var keys = [];
-        var current = null;
-        for (var i = 0; i < this.table.length; i++) {
-            if (this.table[i] === undefined) {
-                continue;
-            } else {
-                current = this.table[i].getHeadNode();
-                while (current !== null) {
-                    keys.push(current.getData().key);
-                    current = current.next;
-                }
-            }
-        }
-        return keys;
+        return getArrayOf(this, 'keys');
     };
 
     /**
@@ -284,17 +271,28 @@
         var index = this.hashFn(key);
         var status = false;
 
+        // if the entry at the hashed lookup is undefined, then there is no
+        // key present to remove
         if (this.table[index] === undefined) {
             return status;
         }
 
+        // get reference the head node
         var current = this.table[index].getHeadNode();
+
+        // iterate over the linked-list while there is still a key in the list
         while (listContainsKey(this.table[index], key) && current !== null) {
+
+            // if the current node's key matches the key to remove
             if (current.getData().key === key) {
+
+                // remove the node, decrement the size, and set status
                 this.table[index].removeNode(current.getData());
                 this._size--;
                 status = true;
             }
+
+            // move to next node
             current = current.next;
         }
         return status;
@@ -315,21 +313,9 @@
      * @return {array} the values in the hash table
      */
     HashTable.prototype.values = function () {
-        var values = [];
-        var current = null;
-        for (var i = 0; i < this.table.length; i++) {
-            if (this.table[i] === undefined) {
-                continue;
-            } else {
-                current = this.table[i].getHeadNode();
-                while (current !== null) {
-                    values.push(current.getData().value);
-                    current = current.next;
-                }
-            }
-        }
-        return values;
+        return getArrayOf(this, 'values');
     };
+
     // expose HashTable
     module.exports = HashTable;
 
@@ -385,6 +371,47 @@
             current = current.next;
         }
         return null;
+    }
+
+    function getArrayOf(context, items) {
+        if (!_.contains(['values', 'keys'], items)) {
+            throw new Error('invalid parameter: values or keys is required');
+        }
+
+        var results = [];
+        var current = null;
+
+        // loop over all elements, or indexes, of the hash table
+        for (var i = 0; i < context.table.length; i++) {
+
+            // if the value of the table at index i is undefined, obviously
+            // no linked-list is present, therefore no keys to add, so
+            // we move on
+            if (context.table[i] === undefined) {
+                continue;
+
+            // there is a linked-list at index i
+            } else {
+                // get reference to the head node
+                current = context.table[i].getHeadNode();
+
+                // iterate over the list
+                while (current !== null) {
+
+                    if (items === 'values') {
+                        // push the value on the array
+                        results.push(current.getData().value);
+                    } else {
+                        // push the key on the array
+                        results.push(current.getData().key);
+                    }
+
+                    // get the next node
+                    current = current.next;
+                }
+            }
+        }
+        return results;
     }
     /************************ End Utility Functions ***************************/
 }());
