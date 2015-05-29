@@ -149,6 +149,9 @@ hashtable.isEmpty();
 * ### values()
     Returns an array of all the values in the hash table
 
+* ### setHashFn()
+    Sets the hash function for the hash table to fn
+
 ----
 ## License
 MIT &copy; Jason Jones
