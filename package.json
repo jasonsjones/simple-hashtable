@@ -1,6 +1,6 @@
 {
   "name": "simple-hashtable",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Javascript implementation of a simple hash table data structure",
   "main": "index.js",
   "scripts": {
