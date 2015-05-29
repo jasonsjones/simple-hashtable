@@ -149,7 +149,7 @@ hashtable.isEmpty();
 * ### values()
     Returns an array of all the values in the hash table
 
-* ### setHashFn()
+* ### setHashFn(fn)
     Sets the hash function for the hash table to fn
 
 ----
