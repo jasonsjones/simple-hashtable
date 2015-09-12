@@ -1,7 +1,7 @@
 /**
  * @fileOverview Implementation of a hash table data structure
  * @author Jason S. Jones
- * @version 0.1.1
+ * @version 0.1.2
  * @license MIT
  */
 (function () {
@@ -60,7 +60,7 @@
      * Determines whether or not the hash table contains the given key
      *
      * @param {string} key the key to find in the hash table
-     * @return {boolean} true if the key is contained in the hash table,
+     * @returns {boolean} true if the key is contained in the hash table,
      *                   false otherwise
      */
     HashTable.prototype.containsKey = function (key) {
@@ -95,7 +95,7 @@
      * Determines whether or not the hash table contains the given value
      *
      * @param {object|string} value the value to find in the hash table
-     * @return {boolean} true if the value is contained in the hash table,
+     * @returns {boolean} true if the value is contained in the hash table,
      *                   false otherwise
      */
     HashTable.prototype.containsValue = function (value) {
@@ -218,7 +218,7 @@
     /**
      * Returns an array of all the keys in the hash table
      *
-     * @return {array} the keys in the hash table
+     * @returns {array} the keys in the hash table
      */
     HashTable.prototype.keys = function () {
         return getArrayOf(this, 'keys');
@@ -270,7 +270,7 @@
     /**
      * Returns the number of keys in the hash table
      *
-     * @return {number} the number of keys in the hash table
+     * @returns {number} the number of keys in the hash table
      */
     HashTable.prototype.size = function () {
         return this._size;
@@ -295,7 +295,7 @@
     /**
      * Returns an array of all the values in the hash table
      *
-     * @return {array} the values in the hash table
+     * @returns {array} the values in the hash table
      */
     HashTable.prototype.values = function () {
         return getArrayOf(this, 'values');
@@ -312,7 +312,7 @@
      * susceptible to a hash collision
      *
      * @param {string} key the key to hash
-     * @return {number} the hash value to use as index
+     * @returns {number} the hash value to use as index
      */
     // function loseloseHashCode(key) {
     //     var hashValue = 0;
@@ -328,7 +328,7 @@
      * hash values than the lose lose hash function.
      *
      * @param {string} key the key to hash
-     * @return {number} the hash value to use as index
+     * @returns {number} the hash value to use as index
      */
     function djb2HashCode(key) {
         var hashValue = 5381;
@@ -344,7 +344,7 @@
      * @param {object} list the linked list to check if it contains the key
      * @param {string} key the key to use to determine if it is contained in
      *                  the list
-     * @return {object|null} the linked list node that contains the key;
+     * @returns {object|null} the linked list node that contains the key;
      *                       null otherwise
      */
     function listContainsKey(list, key) {
