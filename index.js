@@ -1,7 +1,6 @@
 /**
  * @fileOverview Implementation of a hash table data structure
  * @author Jason S. Jones
- * @version 0.1.2
  * @license MIT
  */
 (function () {
