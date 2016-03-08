@@ -1,4 +1,4 @@
-[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![dependency status][dm-image]][dm-url]
+[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![dependency status][dm-image]][dm-url] [![devDependency status][devdep-image]][devdep-url]
 
 # Simple Hash Table
 
@@ -162,3 +162,5 @@ MIT &copy; Jason Jones
 [travis-url]:https://travis-ci.org/jasonsjones/simple-hashtable
 [dm-image]:https://david-dm.org/jasonsjones/simple-hashtable.svg
 [dm-url]:https://david-dm.org/jasonsjones/simple-hashtable
+[devdep-image]:https://david-dm.org/jasonsjones/simple-hashtable/dev-status.svg
+[devdep-url]:https://david-dm.org/jasonsjones/simple-hashtable#info=devDependencies
