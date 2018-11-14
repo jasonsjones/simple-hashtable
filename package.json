@@ -33,7 +33,7 @@
     "mocha": "^2.3.4"
   },
   "dependencies": {
-    "lodash": "^3.10.0",
-    "singly-linked-list": "^0.2.5"
+    "lodash": "^4.17.11",
+    "singly-linked-list": "^1.4.0"
   }
 }
