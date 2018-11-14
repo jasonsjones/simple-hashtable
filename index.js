@@ -3,7 +3,7 @@
  * @author Jason S. Jones
  * @license MIT
  */
-(function () {
+(function() {
     'use strict';
 
     // helper module to encapsulate a key/value pair
@@ -14,7 +14,8 @@
     var LinkedList = require('singly-linked-list');
 
     // lodash utility module
-    var _ = require('lodash');
+    var _isEqual = require('lodash.isEqual');
+    var _includes = require('lodash.includes');
 
     /**
      * Creates a new hash table instance
@@ -43,14 +44,14 @@
      *
      * @returns {boolean} true if hash table is empty, false otherwise
      */
-    HashTable.prototype.isEmpty  = function () {
+    HashTable.prototype.isEmpty = function() {
         return this._size === 0;
     };
 
     /**
      * Clears the hash table of all keys and values
      */
-    HashTable.prototype.clear = function () {
+    HashTable.prototype.clear = function() {
         this.table = [];
         this._size = 0;
     };
@@ -62,7 +63,7 @@
      * @returns {boolean} true if the key is contained in the hash table,
      *                   false otherwise
      */
-    HashTable.prototype.containsKey = function (key) {
+    HashTable.prototype.containsKey = function(key) {
         // get the hash of the key to determine where to index in table
         var index = this.hashFn(key);
 
@@ -97,7 +98,7 @@
      * @returns {boolean} true if the value is contained in the hash table,
      *                   false otherwise
      */
-    HashTable.prototype.containsValue = function (value) {
+    HashTable.prototype.containsValue = function(value) {
         // initialize current node to null
         var current = null;
 
@@ -111,9 +112,8 @@
             if (this.table[i] === undefined) {
                 continue;
 
-            // there is a value in the table at index i
+                // there is a value in the table at index i
             } else {
-
                 // get a reference to the head node of the linked-list
                 current = this.table[i].getHeadNode();
 
@@ -124,7 +124,7 @@
 
                     // if the current node's value is equal to what we are
                     // looking for--success
-                    if (_.isEqual(currentValue, value)) {
+                    if (_isEqual(currentValue, value)) {
                         return true;
                     }
 
@@ -151,8 +151,7 @@
      *
      * @returns {object} this for method chaining
      */
-    HashTable.prototype.put = function (key, value) {
-
+    HashTable.prototype.put = function(key, value) {
         // hash the key to get the index
         var index = this.hashFn(key);
 
@@ -187,7 +186,7 @@
      *                 retrieve the value
      * @returns {number|string|object} the value associated the the key
      */
-    HashTable.prototype.get = function (key) {
+    HashTable.prototype.get = function(key) {
         // hash the key to get the index
         var index = this.hashFn(key);
         if (this.table[index] === undefined) {
@@ -199,7 +198,6 @@
 
         // iterate over the list
         while (current !== null) {
-
             // until the first keys match
             if (current.getData().key === key) {
                 return current.getData().value;
@@ -219,7 +217,7 @@
      *
      * @returns {array} the keys in the hash table
      */
-    HashTable.prototype.keys = function () {
+    HashTable.prototype.keys = function() {
         return getArrayOf(this, 'keys');
     };
 
@@ -235,7 +233,7 @@
      *
      * @returns {object} this for method chaining
      */
-    HashTable.prototype.remove = function (key) {
+    HashTable.prototype.remove = function(key) {
         var index = this.hashFn(key);
         var status = false;
 
@@ -250,10 +248,8 @@
 
         // iterate over the linked-list while there is still a key in the list
         while (listContainsKey(this.table[index], key) && current !== null) {
-
             // if the current node's key matches the key to remove
             if (current.getData().key === key) {
-
                 // remove the node, decrement the size, and set status
                 this.table[index].removeNode(current.getData());
                 this._size--;
@@ -271,7 +267,7 @@
      *
      * @returns {number} the number of keys in the hash table
      */
-    HashTable.prototype.size = function () {
+    HashTable.prototype.size = function() {
         return this._size;
     };
 
@@ -285,7 +281,7 @@
      *
      * @param {function} fn the hash function to use for the hash table
      */
-    HashTable.prototype.setHashFn = function (fn) {
+    HashTable.prototype.setHashFn = function(fn) {
         if (fn instanceof Function && this.isEmpty()) {
             this.hashFn = fn;
         }
@@ -296,7 +292,7 @@
      *
      * @returns {array} the values in the hash table
      */
-    HashTable.prototype.values = function () {
+    HashTable.prototype.values = function() {
         return getArrayOf(this, 'values');
     };
 
@@ -358,7 +354,7 @@
     }
 
     function getArrayOf(context, items) {
-        if (!_.includes(['values', 'keys'], items)) {
+        if (!_includes(['values', 'keys'], items)) {
             throw new Error('invalid parameter: values or keys is required');
         }
 
@@ -367,21 +363,19 @@
 
         // loop over all elements, or indexes, of the hash table
         for (var i = 0; i < context.table.length; i++) {
-
             // if the value of the table at index i is undefined, obviously
             // no linked-list is present, therefore no keys to add, so
             // we move on
             if (context.table[i] === undefined) {
                 continue;
 
-            // there is a linked-list at index i
+                // there is a linked-list at index i
             } else {
                 // get reference to the head node
                 current = context.table[i].getHeadNode();
 
                 // iterate over the list
                 while (current !== null) {
-
                     if (items === 'values') {
                         // push the value on the array
                         results.push(current.getData().value);
@@ -398,4 +392,4 @@
         return results;
     }
     /************************ End Utility Functions ***************************/
-}());
+})();
