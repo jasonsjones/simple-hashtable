@@ -358,7 +358,7 @@
     }
 
     function getArrayOf(context, items) {
-        if (!_.contains(['values', 'keys'], items)) {
+        if (!_.includes(['values', 'keys'], items)) {
             throw new Error('invalid parameter: values or keys is required');
         }
 
