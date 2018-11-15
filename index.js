@@ -14,7 +14,7 @@
     var LinkedList = require('singly-linked-list');
 
     // lodash utility module
-    var _isEqual = require('lodash.isEqual');
+    var _isEqual = require('lodash.isequal');
     var _includes = require('lodash.includes');
 
     /**
