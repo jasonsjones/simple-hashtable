@@ -26,8 +26,6 @@
     "devDependencies": {
         "chai": "^4.2.0",
         "eslint": "^5.9.0",
-        "lodash.includes": "^4.3.0",
-        "lodash.isequal": "^4.5.0",
         "mocha": "^5.2.0"
     },
     "dependencies": {
