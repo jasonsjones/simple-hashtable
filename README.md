@@ -6,7 +6,7 @@
 
 [npm-image]: https://img.shields.io/npm/v/simple-hashtable.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/simple-hashtable
-[circleci-image]: https://img.shields.io/circleci/project/github/jasonsjones/simple-hashtabel.svg?style=flat-square
+[circleci-image]: https://img.shields.io/circleci/project/github/jasonsjones/simple-hashtable.svg?style=flat-square
 [circleci-url]: https://circleci.com/gh/jasonsjones/simple-hashtable
 [dep-status-image]: https://img.shields.io/david/jasonsjones/simple-hashtable.svg?style=flat-square
 [dep-status-url]: https://david-dm.org/jasonsjones/simple-hashtable
