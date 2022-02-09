@@ -11,7 +11,7 @@
 
     // singly linked-list to use at each hash value to mitigate
     // hash collisions
-    var LinkedList = require('singly-linked-list');
+    var LinkedList = require('singly-linked-list').default;
 
     // lodash utility module
     var _isEqual = require('lodash.isequal');
